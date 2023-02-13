@@ -1,0 +1,20 @@
+---
+- name: My Service
+  hosts: all
+  become: yes
+ 
+  tasks:
+    - name: Task Ping
+      ping:
+    - name: Copy service 
+      copy:
+        src: ./service/myservice.service
+        dest: /etc/systemd/system/myservice.service
+    - name: Systemd daemon
+      ansible.builtin.systemd:
+        daemon_reload: true
+    - name: Run service
+      ansible.builtin.service:
+        name: myservice.service
+        state: started
+        enabled: true

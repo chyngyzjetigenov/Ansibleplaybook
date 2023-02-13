@@ -1,0 +1,15 @@
+[Unit]
+Description=My Service
+ConditionPathExists=/home/jetigenov/app
+After=network.target
+
+[Service]
+Type=simple
+User=jetigenov
+WorkingDirectory=/home/jetigenov/app
+ExecStart=/usr/local/go/bin/go run .
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
